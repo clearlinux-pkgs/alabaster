@@ -6,7 +6,7 @@
 #
 Name     : alabaster
 Version  : 0.7.10
-Release  : 4
+Release  : 5
 URL      : http://pypi.debian.net/alabaster/alabaster-0.7.10.tar.gz
 Source0  : http://pypi.debian.net/alabaster/alabaster-0.7.10.tar.gz
 Source99 : http://pypi.debian.net/alabaster/alabaster-0.7.10.tar.gz.asc
@@ -14,6 +14,7 @@ Summary  : A configurable sidebar-enabled Sphinx theme
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: alabaster-legacypython
+Requires: alabaster-python3
 Requires: alabaster-python
 BuildRequires : pbr
 BuildRequires : pip
@@ -38,9 +39,18 @@ legacypython components for the alabaster package.
 Summary: python components for the alabaster package.
 Group: Default
 Requires: alabaster-legacypython
+Requires: alabaster-python3
 
 %description python
 python components for the alabaster package.
+
+
+%package python3
+Summary: python3 components for the alabaster package.
+Group: Default
+
+%description python3
+python3 components for the alabaster package.
 
 
 %prep
@@ -51,12 +61,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1504997733
+export SOURCE_DATE_EPOCH=1506875017
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1504997733
+export SOURCE_DATE_EPOCH=1506875017
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
@@ -72,5 +82,8 @@ echo ----[ mark ]----
 /usr/lib/python2*/*
 
 %files python
+%defattr(-,root,root,-)
+
+%files python3
 %defattr(-,root,root,-)
 /usr/lib/python3*/*
