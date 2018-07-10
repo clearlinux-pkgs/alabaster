@@ -6,7 +6,7 @@
 #
 Name     : alabaster
 Version  : 0.7.11
-Release  : 22
+Release  : 23
 URL      : http://pypi.debian.net/alabaster/alabaster-0.7.11.tar.gz
 Source0  : http://pypi.debian.net/alabaster/alabaster-0.7.11.tar.gz
 Source99 : http://pypi.debian.net/alabaster/alabaster-0.7.11.tar.gz.asc
