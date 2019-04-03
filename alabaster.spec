@@ -6,7 +6,7 @@
 #
 Name     : alabaster
 Version  : 0.7.12
-Release  : 27
+Release  : 28
 URL      : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz
 Source99 : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz.asc
@@ -16,24 +16,15 @@ License  : BSD-3-Clause
 Requires: alabaster-license = %{version}-%{release}
 Requires: alabaster-python = %{version}-%{release}
 Requires: alabaster-python3 = %{version}-%{release}
-BuildRequires : buildreq-distutils23
 BuildRequires : buildreq-distutils3
 BuildRequires : python-core
 BuildRequires : setuptools-legacypython
 
 %description
+What is Alabaster?
 ==================
-        
-        Alabaster is a visually (c)lean, responsive, configurable theme for the `Sphinx
-
-%package legacypython
-Summary: legacypython components for the alabaster package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the alabaster package.
-
+Alabaster is a visually (c)lean, responsive, configurable theme for the `Sphinx
+<http://sphinx-doc.org>`_ documentation system. It is Python 2+3 compatible.
 
 %package license
 Summary: license components for the alabaster package.
@@ -69,27 +60,22 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1538597102
-python2 setup.py build -b py2
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1554305271
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
-export SOURCE_DATE_EPOCH=1538597102
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alabaster
 cp LICENSE %{buildroot}/usr/share/package-licenses/alabaster/LICENSE
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
-
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
 
 %files license
 %defattr(0644,root,root,0755)
