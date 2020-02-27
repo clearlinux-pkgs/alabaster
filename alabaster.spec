@@ -6,10 +6,10 @@
 #
 Name     : alabaster
 Version  : 0.7.12
-Release  : 35
+Release  : 36
 URL      : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz
-Source1 : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz.asc
+Source1  : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz.asc
 Summary  : A configurable sidebar-enabled Sphinx theme
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -19,9 +19,25 @@ Requires: alabaster-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 
 %description
+What is Alabaster?
 ==================
-        
-        Alabaster is a visually (c)lean, responsive, configurable theme for the `Sphinx
+
+Alabaster is a visually (c)lean, responsive, configurable theme for the `Sphinx
+<http://sphinx-doc.org>`_ documentation system. It is Python 2+3 compatible.
+
+It began as a third-party theme, and is still maintained separately, but as of
+Sphinx 1.3, Alabaster is an install-time dependency of Sphinx and is selected
+as the default theme.
+
+Live examples of this theme can be seen on `this project's own website
+<http://alabaster.readthedocs.io>`_, `paramiko.org <http://paramiko.org>`_,
+`fabfile.org <http://fabfile.org>`_ and `pyinvoke.org <http://pyinvoke.org>`_.
+
+For more documentation, please see http://alabaster.readthedocs.io.
+
+.. note::
+    You can install the development version via ``pip install -e
+    git+https://github.com/bitprophet/alabaster/#egg=alabaster``.
 
 %package license
 Summary: license components for the alabaster package.
@@ -44,6 +60,7 @@ python components for the alabaster package.
 Summary: python3 components for the alabaster package.
 Group: Default
 Requires: python3-core
+Provides: pypi(alabaster)
 
 %description python3
 python3 components for the alabaster package.
@@ -51,13 +68,15 @@ python3 components for the alabaster package.
 
 %prep
 %setup -q -n alabaster-0.7.12
+cd %{_builddir}/alabaster-0.7.12
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570660421
+export SOURCE_DATE_EPOCH=1582845299
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -70,7 +89,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/alabaster
-cp LICENSE %{buildroot}/usr/share/package-licenses/alabaster/LICENSE
+cp %{_builddir}/alabaster-0.7.12/LICENSE %{buildroot}/usr/share/package-licenses/alabaster/04da7d4f55379e4b1055b4b9ee2d14a2706a334c
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -81,7 +100,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/alabaster/LICENSE
+/usr/share/package-licenses/alabaster/04da7d4f55379e4b1055b4b9ee2d14a2706a334c
 
 %files python
 %defattr(-,root,root,-)
