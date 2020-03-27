@@ -6,7 +6,7 @@
 #
 Name     : alabaster
 Version  : 0.7.12
-Release  : 36
+Release  : 37
 URL      : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz
 Source0  : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz
 Source1  : https://files.pythonhosted.org/packages/cc/b4/ed8dcb0d67d5cfb7f83c4d5463a7614cb1d078ad7ae890c9143edebbf072/alabaster-0.7.12.tar.gz.asc
@@ -21,23 +21,8 @@ BuildRequires : buildreq-distutils3
 %description
 What is Alabaster?
 ==================
-
 Alabaster is a visually (c)lean, responsive, configurable theme for the `Sphinx
 <http://sphinx-doc.org>`_ documentation system. It is Python 2+3 compatible.
-
-It began as a third-party theme, and is still maintained separately, but as of
-Sphinx 1.3, Alabaster is an install-time dependency of Sphinx and is selected
-as the default theme.
-
-Live examples of this theme can be seen on `this project's own website
-<http://alabaster.readthedocs.io>`_, `paramiko.org <http://paramiko.org>`_,
-`fabfile.org <http://fabfile.org>`_ and `pyinvoke.org <http://pyinvoke.org>`_.
-
-For more documentation, please see http://alabaster.readthedocs.io.
-
-.. note::
-    You can install the development version via ``pip install -e
-    git+https://github.com/bitprophet/alabaster/#egg=alabaster``.
 
 %package license
 Summary: license components for the alabaster package.
@@ -75,7 +60,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582845299
+export SOURCE_DATE_EPOCH=1585319796
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
